@@ -1,6 +1,6 @@
 let fs = require("fs");
 const { Module } = require("module");
-let expenseReport = fs.readFileSync("./input.txt", "utf-8");
+let expenseReport = fs.readFileSync("./test.txt", "utf-8");
 let expenseArray = expenseReport.split("\n").map(Number);
 
 let findSum = function(expArray, totalSum) {

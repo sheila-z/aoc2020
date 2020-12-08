@@ -1,5 +1,5 @@
 let fs = require('fs');
-let inputText = fs.readFileSync('./input.txt', 'utf-8');
+let inputText = fs.readFileSync('./test.txt', 'utf-8');
 let bagArray = inputText.split('\n');
 
 // function takes array of bags to analyse, paired array of values reulting

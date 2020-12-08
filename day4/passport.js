@@ -1,7 +1,7 @@
 const { constants } = require("buffer");
 const { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } = require("constants");
 let fs = require('fs');
-let inputText = fs.readFileSync('./input.txt', 'utf-8');
+let inputText = fs.readFileSync('./test.txt', 'utf-8');
 let passportArray = inputText.replace(/\n/g, ' ').split('  ');
 
 const items = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'];

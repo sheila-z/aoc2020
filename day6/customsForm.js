@@ -1,5 +1,5 @@
 let fs = require('fs');
-let inputText = fs.readFileSync('./input.txt', 'utf-8');
+let inputText = fs.readFileSync('./test.txt', 'utf-8');
 let questionsArray = inputText.replace(/\n/g, ' ').split('  ');
 
 let sum = 0;

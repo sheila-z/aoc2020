@@ -1,7 +1,7 @@
 const util = require('util')
 
 let fs = require("fs");
-let inputText = fs.readFileSync("./input.txt", "utf-8");
+let inputText = fs.readFileSync("./test.txt", "utf-8");
 let seatsArray = inputText.split("\n");
 
 let rowSearch = function (seatID) {

@@ -1,5 +1,5 @@
 let fs = require("fs");
-let inputText = fs.readFileSync("./input.txt", "utf-8");
+let inputText = fs.readFileSync("./test.txt", "utf-8");
 // Each line will be an item in the array
 let policyPassArray = inputText.split("\n");
 
