@@ -4,21 +4,20 @@ let bagArray = inputText.split('\n');
 
 let finalBagArray = [];
 
-let analyseBags = function (bagTypes) {
-    let bagTypeUnderAnalysis = bagTypes;
-    console.log(bagTypeUnderAnalysis)
+let analyseBags = function (bagTypeUnderAnalysis) {
     let bagsToBeAnalysed = [];
     
+    // for each bag on the array
     bagTypeUnderAnalysis.forEach(function (bags) {
-        bagArray.forEach(function (bagRule, index) {
+        // run through the rules list
+        bagArray.forEach(function (bagRule) {
+            // split between container and content
             bagRule = bagRule.split('contain');
-            // console.log(bags)
-            // console.log(bagRule[0])
-            // console.log(bagRule[1])
-            // console.log(index)
-            // console.log(bagRule[1].includes(bags))
+            // for the container, trim and make it singular
             bagRule[0] = bagRule[0].replace('bags ', 'bag');
+            // check if the content has the bag under analysis and if the new array doesn't contain the container
             if (bagRule[1].includes(bags) && !bagsToBeAnalysed.includes(bagRule[0])) {
+                // check if the container is not in the final array already
                 if (!finalBagArray.includes(bagRule[0])) {
                     finalBagArray.push(bagRule[0]);
                 };
