@@ -2,43 +2,42 @@ let fs = require('fs');
 let inputText = fs.readFileSync('./input.txt', 'utf-8');
 let bagArray = inputText.split('\n');
 
-let analyseBags = function (bagTypes, bagNumbers, currentCount) {
-    let bagTypeUnderAnalysis = bagTypes;
-    let bagIndex = bagNumbers;
-    // console.log(bagIndex); //
-    let count = currentCount;
-    // console.log(bagTypeUnderAnalysis)
+// function takes array of bags to analyse, paired array of values reulting
+// of the multiplication of the current amount found by the previous multiplications
+// also takes in the current count for recursion
+let analyseBags = function (bagTypeUnderAnalysis, bagIndex, count) {
+    // zero-ing values
     let bagsToBeAnalysed = [];
     let bagsValues = [];
     let mult = 0;
     
+    // for Each bag type on the list
     bagTypeUnderAnalysis.forEach(function (bags, index) {
-        // console.log(bags) //
+        // run through the whole input
         bagArray.forEach(function (bagRule) {
+            // split the rule in 2 pieces: container and content
             bagRule = bagRule.split('contain');
-            // console.log(bagRule[0])
-            // console.log(bagRule[1])
-            // console.log(index)
-            // console.log(bagRule[1].includes(bags))
+            // make the container singular (bag)
             bagRule[0] = bagRule[0].replace('bags ', 'bag');
-            // console.log(bagRule[0].includes(bags)); //
+            // check which conatiner has the bag you're analysing
             if (bagRule[0].includes(bags)) {
+                // excludes bags that do not contain anything
+                // probably a logic flaw here, if this was the case in the very first pass
                 if (!bagRule[1].includes('other')) {
                     let bagsInside = bagRule[1].split(',')
                     bagsInside.forEach(function (splitBagsInside) {
+                        // for each bag in the container trim, make sigular and remove period
                         splitBagsInside = splitBagsInside.trim();
                         splitBagsInside = splitBagsInside.replace('bags.', 'bag');
                         splitBagsInside = splitBagsInside.replace('bags', 'bag');
                         splitBagsInside = splitBagsInside.replace('bag.', 'bag');
-                        // console.log(splitBagsInside); //
-                        
-                        // console.log(bagsValues); //
-                        // console.log(splitBagsInside[0]); //
-                        // console.log(bagIndex[index]); //
+                        // multiply number found by the previous multiplication
                         mult = splitBagsInside[0] * bagIndex[index];
+                        // push multiplication to new array
                         bagsValues.push(mult);
+                        // increase count
                         count = count + mult;
-                        // console.log(count); //
+                        // remove the number and trims bag name before pushing to new array
                         splitBagsInside = splitBagsInside.replace(/\d/, '')
                         splitBagsInside = splitBagsInside.trim();
                         bagsToBeAnalysed.push(splitBagsInside);
@@ -47,6 +46,7 @@ let analyseBags = function (bagTypes, bagNumbers, currentCount) {
             };
         });   
     });
+    // recursion if array not empty
     if (bagsToBeAnalysed.length > 0) {
         analyseBags(bagsToBeAnalysed, bagsValues, count);
     } else {
@@ -56,4 +56,5 @@ let analyseBags = function (bagTypes, bagNumbers, currentCount) {
 
 const initialBag = ['shiny gold bag'];
 const initialValue = ['1'];
+// analyseBags must take in arrays, initialised above
 analyseBags(initialBag, initialValue, 0);
